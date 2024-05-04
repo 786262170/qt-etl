@@ -1,0 +1,38 @@
+include:
+  - project: 'devops/gitlabci-templates'
+    ref: master
+    file: 'jobs-templates/Auto-DevOps.gitlab-ci.yml'
+
+
+### 功能开关请参照此链接中的定义: https://gitlab.iquantex.com/devops/gitlabci-templates/-/raw/master/vars/default-vars.stable.gitlab-ci.yml
+
+
+
+###############################   Python 工程示例
+
+### 提供 requirements.txt (必要) 文件，程序启动入口已 `main.py` 启动
+# variables:
+#   UNIT_TEST_ENABLE: "false"
+#   DOCKER_DAEMON_WORKSPACE: "/tmp/docker-workspace"  # 此处 WorkSpace 请使用绝对路径
+
+### 生成 whl 包而不进行 构建 Docker 镜像
+# 开启方法: "提供 BUILD_SHELL whl 构建命令 并指定 PROJECT_TYPE 为 python"
+# whl 包版本由 setup.py 中的逻辑生成， CI 且将结果上传至 私服中。
+
+# variables:
+#   UNIT_TEST_ENABLE: "false"
+#   BUILD_SHELL: "python3 setup.py bdist_wheel"
+#   PROJECT_TYPE: "python"
+#   PYTHON_UNIT_TEST_SHELL: "python -m unittest"
+
+## Python 模型库管理
+# 使用方法见 README 说明: https://gitlab.iquantex.com/devops/gitlabci-templates#python-%E5%B7%A5%E7%A8%8B-quick-start
+variables:
+  UNIT_TEST_ENABLE: "false"
+  PROJECT_TYPE: "python"
+  DOCKER_DAEMON_WORKSPACE: "/tmp/docker-workspace"
+  SONAR_COMMON: "false"
+  FEAT_DOCKER_IMAGE_BUILD: "true"
+
+
+#-----------------------------------------------------
